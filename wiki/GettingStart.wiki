@@ -1,0 +1,22 @@
+#summary Getting start with browser runner
+
+= Introduction =
+
+Browser runner could help you to avoid the boring url typing when you are developing a webapp with Run-Jetty-Run.
+
+
+Here we are going to introduce the plugin , it's simple and easy.
+
+= Details =
+
+It work with hotkey , focus on the editor and click the hot-key ,
+and waitng for browser show up .
+
+
+We set the system browser as default (alt+1) , 
+you could set other browser's program path(like Firefox,Chrome...etc) in Alt + 2 ...9 . 
+
+
+Window -> Preference -> Browser Runner -> Browser path.
+
+
