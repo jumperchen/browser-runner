@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/BrowserRunnerFeature_1.0.0.jar" id="BrowserRunnerFeature" version="1.0.0">
+      <category name="BrowserRunner"/>
+   </feature>
+   <category-def name="BrowserRunner" label="BrowserRunner"/>
+</site>

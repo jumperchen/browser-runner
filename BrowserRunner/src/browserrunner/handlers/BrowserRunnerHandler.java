@@ -15,7 +15,6 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import runjettyrun.utils.ProjectUtil;
 import runjettyrun.utils.RunJettyRunLaunchConfigurationUtil;
 import browserrunner.BrowserRunnerActivator;
-import browserrunner.bootstrap.BrowserRunner;
 import browserrunner.bootstrap.BrowserRunnerUrlBuilder;
 import browserrunner.preferences.PreferenceConstants;
 import browserrunner.util.BrowserUtil;
@@ -40,7 +39,7 @@ public class BrowserRunnerHandler extends AbstractHandler {
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil
 				.getActiveWorkbenchWindowChecked(event);
-
+		
 		int index = Integer.parseInt(event.getParameter("browserIndex"));
 		final String browserPath = (BrowserRunnerActivator.getDefault()
 				.getPreferenceStore().getString(PreferenceConstants
