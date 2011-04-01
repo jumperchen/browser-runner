@@ -7,10 +7,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.browser.IWebBrowser;
 import org.eclipse.ui.browser.IWorkbenchBrowserSupport;
 
-import browserrunner.BrowserRunnerActivator;
-
-import runjettyrun.Plugin;
-
 public class BrowserUtil {
 
 	/**

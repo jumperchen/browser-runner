@@ -41,8 +41,7 @@ public class BrowserRunnerPreference
 				new StringFieldEditor(PreferenceConstants.P_HOST_PATH, "&Host Name", getFieldEditorParent()));
 
 	}
-
-	@Override
+	
 	public void init(IWorkbench workbench) {
 
 	}
