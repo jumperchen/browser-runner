@@ -3,5 +3,8 @@
    <feature url="features/BrowserRunnerFeature_1.0.0.jar" id="BrowserRunnerFeature" version="1.0.0">
       <category name="BrowserRunner"/>
    </feature>
+   <feature url="features/BrowserRunnerFeature_1.0.1.jar" id="BrowserRunnerFeature" version="1.0.1">
+      <category name="BrowserRunner"/>
+   </feature>
    <category-def name="BrowserRunner" label="BrowserRunner"/>
 </site>
