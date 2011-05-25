@@ -58,6 +58,10 @@ public class BrowserRunnerHandler extends AbstractHandler {
 				.getPreferenceStore()
 				.getBoolean(PreferenceConstants.P_START_RJR));
 
+		final boolean hostFailback = (BrowserRunnerActivator.getDefault()
+				.getPreferenceStore()
+				.getBoolean(PreferenceConstants.P_HOST_FAILBACK));
+
 		final IResource target = getSelectedResource(window);
 		IProject proj = target == null ? null : target.getProject();
 
@@ -67,7 +71,8 @@ public class BrowserRunnerHandler extends AbstractHandler {
 
 			try {
 				try{
-					if(startRJR && isAvailablePort(Integer.parseInt(lconf.getAttribute(RunJettyRunSupport.LAUNCH_PORT,"-1")))){
+					int port = Integer.parseInt(lconf.getAttribute(RunJettyRunSupport.LAUNCH_PORT,"-1"));
+					if(startRJR && isAvailablePort(port)){
 						lconf.launch(ILaunchManager.DEBUG_MODE, null);
 					}
 				}catch(NumberFormatException e){
@@ -80,7 +85,7 @@ public class BrowserRunnerHandler extends AbstractHandler {
 				}
 
 				BrowserRunnerUrlBuilder arg = new BrowserRunnerUrlBuilder(
-						hostName, browserPath, lconf, target);
+						hostName, browserPath, lconf, target , hostFailback);
 				if (index == 0) { // default external browser
 					BrowserUtil.openSystemBrowser(arg.getUrl());
 				} else {

@@ -22,6 +22,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(PreferenceConstants.P_BROWSER_PATH +"1" , "\"C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe\"");
 		store.setDefault(PreferenceConstants.P_HOST_PATH , "localhost");
 		store.setDefault(PreferenceConstants.P_START_RJR , false);
+		store.setDefault(PreferenceConstants.P_HOST_FAILBACK ,false);
 	}
 
 }

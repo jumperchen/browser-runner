@@ -11,6 +11,7 @@ public class PreferenceConstants {
 	public static final String P_HOST_PATH = "hostPathPreference";
 
 	public static final String P_START_RJR = "startRunJetyRunPreference";
+	public static final String P_HOST_FAILBACK = "hostFailbackJetyRunPreference";
 
 	/**
 	 * get browser path key
