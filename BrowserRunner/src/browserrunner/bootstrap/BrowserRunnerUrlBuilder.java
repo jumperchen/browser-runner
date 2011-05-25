@@ -6,6 +6,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
 import browserrunner.integration.RunJettyRunSupport;
+import browserrunner.util.ConnectionUtil;
 
 public class BrowserRunnerUrlBuilder {
 
@@ -33,12 +34,22 @@ public class BrowserRunnerUrlBuilder {
 
 	public BrowserRunnerUrlBuilder(String hostname, String browserPath,
 			ILaunchConfiguration rjrLaunchConfig, IResource resource) {
+		this(hostname,browserPath,rjrLaunchConfig,resource,false);
+	}
+
+	public BrowserRunnerUrlBuilder(String hostname, String browserPath,
+			ILaunchConfiguration rjrLaunchConfig, IResource resource, boolean failback) {
 
 		try {
-			if (hostname == null || "".equals(hostname.trim()))
+
+
+			if (hostname == null || "".equals(hostname.trim()) ||
+				(failback && !ConnectionUtil.isHostAlive(hostname, 1500 ,false))
+			){
 				this.hostname = "localhost";
-			else
+			}else{
 				this.hostname = hostname;
+			}
 			this.browserPath = browserPath;
 			this.webapp = rjrLaunchConfig.getAttribute(RunJettyRunSupport.LAUNCH_WEBAPPDIR, "");
 			this.context = rjrLaunchConfig.getAttribute(RunJettyRunSupport.LAUNCH_CONTEXT, "");
@@ -56,6 +67,7 @@ public class BrowserRunnerUrlBuilder {
 		}
 
 	}
+
 
 	public String getHostname() {
 		return hostname;

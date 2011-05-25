@@ -46,6 +46,10 @@ public class BrowserRunnerPreference
 						"&Start up Run-Jetty-Run when the port not using."+
 						"(Need some time ,please wait and then reload browser.)",
 						getFieldEditorParent()));
+		addField(
+				new BooleanFieldEditor(PreferenceConstants.P_HOST_FAILBACK,
+						"&Using localhost when hostname lost connection( take time for first time detect host)",
+						getFieldEditorParent()));
 	}
 
 	public void init(IWorkbench workbench) {
