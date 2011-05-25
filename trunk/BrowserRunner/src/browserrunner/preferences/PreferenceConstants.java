@@ -10,6 +10,8 @@ public class PreferenceConstants {
 	public static final String P_BROWSER_PATH = "browserPathPreference";
 	public static final String P_HOST_PATH = "hostPathPreference";
 
+	public static final String P_START_RJR = "startRunJetyRunPreference";
+
 	/**
 	 * get browser path key
 	 * @param index start at 0

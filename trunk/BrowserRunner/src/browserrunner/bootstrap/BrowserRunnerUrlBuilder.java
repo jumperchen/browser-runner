@@ -5,7 +5,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.debug.core.ILaunchConfiguration;
 
-import runjettyrun.Plugin;
+import browserrunner.integration.RunJettyRunSupport;
 
 public class BrowserRunnerUrlBuilder {
 
@@ -15,7 +15,7 @@ public class BrowserRunnerUrlBuilder {
 
 	private int port;
 
-	private String browserPath ;
+	private String browserPath;
 
 	private String hostname;
 
@@ -26,20 +26,28 @@ public class BrowserRunnerUrlBuilder {
 	 *
 	 * @param rjrLaunchConfig
 	 */
-	public BrowserRunnerUrlBuilder(String browserPath,ILaunchConfiguration rjrLaunchConfig,IResource resource) {
-		this("localhost",browserPath,rjrLaunchConfig,resource);
+	public BrowserRunnerUrlBuilder(String browserPath,
+			ILaunchConfiguration rjrLaunchConfig, IResource resource) {
+		this("localhost", browserPath, rjrLaunchConfig, resource);
 	}
-	public BrowserRunnerUrlBuilder(String hostname,String browserPath,ILaunchConfiguration rjrLaunchConfig,IResource resource) {
+
+	public BrowserRunnerUrlBuilder(String hostname, String browserPath,
+			ILaunchConfiguration rjrLaunchConfig, IResource resource) {
 
 		try {
-			if(hostname == null || "".equals(hostname.trim()) )
+			if (hostname == null || "".equals(hostname.trim()))
 				this.hostname = "localhost";
 			else
 				this.hostname = hostname;
 			this.browserPath = browserPath;
-			this.webapp = rjrLaunchConfig.getAttribute(Plugin.ATTR_WEBAPPDIR, "");
-			this.context = rjrLaunchConfig.getAttribute(Plugin.ATTR_CONTEXT, "");
-			this.port = Integer.parseInt(rjrLaunchConfig.getAttribute(Plugin.ATTR_PORT, "8080"));
+			this.webapp = rjrLaunchConfig.getAttribute(RunJettyRunSupport.LAUNCH_WEBAPPDIR, "");
+			this.context = rjrLaunchConfig.getAttribute(RunJettyRunSupport.LAUNCH_CONTEXT, "");
+
+			if ("".equals(this.webapp) || "".equals(this.context))
+				throw new IllegalArgumentException(
+						"Not correct LaunchConfiguration");
+			this.port = Integer.parseInt(rjrLaunchConfig.getAttribute(
+					RunJettyRunSupport.LAUNCH_PORT, "8080"));
 
 			this.target = resource;
 
@@ -65,7 +73,8 @@ public class BrowserRunnerUrlBuilder {
 		this.browserPath = browserPath;
 	}
 
-	public BrowserRunnerUrlBuilder(String browserPath,String webapp, String context, int port) {
+	public BrowserRunnerUrlBuilder(String browserPath, String webapp,
+			String context, int port) {
 		this.browserPath = browserPath;
 		this.webapp = webapp;
 		this.context = context;
@@ -95,7 +104,8 @@ public class BrowserRunnerUrlBuilder {
 	public void setPort(int port) {
 		this.port = port;
 	}
-	public String getUrl(){
+
+	public String getUrl() {
 
 		IPath targetPath = null;
 
@@ -103,8 +113,18 @@ public class BrowserRunnerUrlBuilder {
 			targetPath = new Path("");
 		} else {
 			IPath relativePath = target.getProjectRelativePath();
-			IPath webappPath = new Path(getWebapp());
-			targetPath = relativePath.makeRelativeTo(webappPath);
+
+
+			String swebappPath = getWebapp();
+			IPath webappPath = new Path(swebappPath);
+			IPath webinfPath = new Path(swebappPath+"/WEB-INF");
+			if("/".equals(swebappPath)) targetPath = relativePath;
+			else{
+				if(!webappPath.isPrefixOf(relativePath) || webinfPath.isPrefixOf(relativePath)){
+					targetPath = new Path("");
+				}else
+					targetPath = relativePath.makeRelativeTo(webappPath);
+			}
 		}
 
 		String context = getContext();
