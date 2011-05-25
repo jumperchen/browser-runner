@@ -12,9 +12,9 @@
             name="Run browser"
             categoryId="BrowserRunner.commands.category"
             id="BrowserRunner.commands.runBrowser">
-           
+
       	<commandParameter id="browserIndex" name="index" optional="false">
-      	</commandParameter> 
+      	</commandParameter>
       </command>
    </extension>
    <extension
@@ -24,12 +24,12 @@
             class="browserrunner.handlers.BrowserRunnerHandler">
       </handler>
    </extension>
-  
+
 <!--   NOTE:
-M1 = CTRL/COMMAND 
-M2 = SHIFT 
-M3 = ALT 
-M4 = Platform-specific fourth key --> 
+M1 = CTRL/COMMAND
+M2 = SHIFT
+M3 = ALT
+M4 = Platform-specific fourth key -->
    <extension
          point="org.eclipse.ui.bindings">
       <key
@@ -140,7 +140,7 @@ M4 = Platform-specific fourth key -->
             category="browserrunner.preferences.BrowserRunnerPreference"
             class="browserrunner.preferences.BrowserRunnerBrowsersPreference"
             id="browserrunner.preferences.BrowserRunnerBrowsersPreference">
-      </page> 
+      </page>
    </extension>
    <extension
          point="org.eclipse.core.runtime.preferences">

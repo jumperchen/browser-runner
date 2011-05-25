@@ -1,5 +1,6 @@
 package browserrunner.preferences;
 
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.jface.preference.StringFieldEditor;
 import org.eclipse.ui.IWorkbench;
@@ -40,8 +41,13 @@ public class BrowserRunnerPreference
 		addField(
 				new StringFieldEditor(PreferenceConstants.P_HOST_PATH, "&Host Name", getFieldEditorParent()));
 
+		addField(
+				new BooleanFieldEditor(PreferenceConstants.P_START_RJR,
+						"&Start up Run-Jetty-Run when the port not using."+
+						"(Need some time ,please wait and then reload browser.)",
+						getFieldEditorParent()));
 	}
-	
+
 	public void init(IWorkbench workbench) {
 
 	}
