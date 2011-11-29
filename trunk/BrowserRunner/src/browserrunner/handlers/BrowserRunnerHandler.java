@@ -23,6 +23,7 @@ import browserrunner.bootstrap.BrowserRunnerUrlBuilder;
 import browserrunner.integration.RunJettyRunSupport;
 import browserrunner.preferences.PreferenceConstants;
 import browserrunner.util.BrowserUtil;
+import browserrunner.util.ProjectUtil;
 
 /**
  * Our sample handler extends AbstractHandler, an IHandler base class.
@@ -62,7 +63,7 @@ public class BrowserRunnerHandler extends AbstractHandler {
 				.getPreferenceStore()
 				.getBoolean(PreferenceConstants.P_HOST_FAILBACK));
 
-		final IResource target = getSelectedResource(window);
+		final IResource target = ProjectUtil.getSelectedResource(window);
 		IProject proj = target == null ? null : target.getProject();
 
 		if (proj != null) {
@@ -141,15 +142,4 @@ public class BrowserRunnerHandler extends AbstractHandler {
 		return false;
 	}
 
-	public static IResource getSelectedResource(IWorkbenchWindow window) {
-		IEditorInput editorinput = window.getActivePage().getActiveEditor()
-				.getEditorInput();
-		FileEditorInput fileEditorInput = (FileEditorInput) editorinput
-				.getAdapter(FileEditorInput.class);
-
-		if (fileEditorInput == null || fileEditorInput.getFile() == null) {
-			return null;
-		}
-		return fileEditorInput.getFile();
-	}
 }
